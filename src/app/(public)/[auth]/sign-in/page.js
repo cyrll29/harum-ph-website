@@ -18,7 +18,7 @@ const SignIn = () => {
       title: 'Last Name'
     },
     {
-      fieldType: 'text',
+      fieldType: 'email',
       title: 'Email'
     }
   ]
