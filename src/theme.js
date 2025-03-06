@@ -19,6 +19,16 @@ const theme = extendTheme({
     xl: '80em',
     '2xl': '96em',
   },
+  components: {
+    Button: {
+      baseStyle: {
+        color: 'text.default',
+        _dark: {
+          color: 'text.white'
+        }
+      }
+    }
+  }
 })
 
 export default theme;
