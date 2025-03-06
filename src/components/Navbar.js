@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <Flex direction='row' justifyContent='space-between' background="tomato" padding={4}>
       <Box display={'flex'} flexDirection={'row'} columnGap={2}>
-        <Button background="blue" onClick={() => router.push('/')} color="text.secondary">Home</Button>
+        <Button bg={{ base: 'text.secondary', md: 'text.default', lg: 'text.white' }} onClick={() => router.push('/')} color="text.secondary">Home</Button>
         <Button variant="outline">Outline</Button>
         <Button>Contact Us</Button>
       </Box>
