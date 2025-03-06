@@ -7,9 +7,10 @@
   index
  }) => {
   switch (fieldType) {
+    case 'email':
     case 'text':
       return (
-        <FormText register={register} title={title} key={index}/>
+        <FormText register={register} title={title} key={index} fieldType={fieldType}/>
       )
   }
  }
