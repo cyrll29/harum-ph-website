@@ -1,11 +1,6 @@
-"use client";
-
-import { ChakraProvider, defineConfig, createSystem } from "@chakra-ui/react"
-import { system } from "@/theme";
-
+import "./globals.css";
+import { Provider } from "@/components/ui/provider";
 import Navbar from "@/components/Navbar";
-
-
 
 export default function RootLayout({ children }) {
   return (
@@ -13,10 +8,10 @@ export default function RootLayout({ children }) {
       <body
         className={`antialiased`}
       >
-        <ChakraProvider value={system}>
+        <Provider>
           <Navbar />
           {children}
-        </ChakraProvider>
+        </Provider>
       </body>
     </html>
   );

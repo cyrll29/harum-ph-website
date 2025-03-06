@@ -1,17 +1,17 @@
-import { createSystem, defineConfig } from "@chakra-ui/react"
+import { extendTheme } from "@chakra-ui/react";
 
-const config = defineConfig({
-  theme: {
-    tokens: {
-      colors: {
-        primary: { value: "#0FEE0F" },
-        secondary: { value: "#EE0F0F" },
-      },
-      fonts: {
-        body: { value: "system-ui, sans-serif" },
+const theme = extendTheme({
+  semanticTokens: {
+    colors: {
+      error: 'red.500',
+      text: {
+        default: '#42adf5',
+        secondary: '#730000',
+        white: '#fff',
+        _dark: '#730000',
       },
     },
   },
 })
 
-export const system = createSystem(config)
+export default theme;
