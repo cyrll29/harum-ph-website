@@ -1,15 +1,66 @@
-import { extendTheme } from "@chakra-ui/react";
-import { color } from "framer-motion";
+import { extendTheme, defineStyle, defineStyleConfig } from "@chakra-ui/react";
+// -------------------------------------------------- Button Theme ---------------------------------------------------
+const primaryVariantButton = defineStyle({
+  bg: 'secondary',
+  color: 'primary',
+  _hover: {
+    bg: 'primary.light',
+    color: '#fff'
+  }
+})
 
+const outlineVariantButton = defineStyle({
+  bg: 'transparent',
+  border: '1px solid',
+  borderColor: 'secondary',
+  color: 'secondary',
+  _hover: {
+    bg: 'secondary',
+    color: 'primary'
+  }
+})
+
+const buttonTheme = defineStyleConfig({
+  variants: {
+    primary: primaryVariantButton,
+    outline: outlineVariantButton,
+  }
+})
+
+// -------------------------------------------------- Theme Config ---------------------------------------------------
 const theme = extendTheme({
+  styles: {
+    global: (props) => ({
+      body: {
+        bg: props.colorMode === 'dark' ? 'primary.dark' : 'primary.default'
+      }
+    })
+  },
+  initialColorMode: 'dark',
+  useSystemColorMode: true,
   colors: {
-    error: 'red.500',
-    text: {
-      default: '#42adf5',
-      secondary: '#730000',
-      white: '#fff',
-      _dark: '#730000',
+    primary: {
+      light: '#695160',
+      default: '#fff',
+      dark: '#2e232a',
     },
+    secondary: {
+      light: '#ebddd8',
+      default: '#2e232a',
+      dark: '#CBBFBB'
+    }
+  },
+  semanticTokens: {
+    colors: {
+      primary: {
+        default: 'primary.default',
+        _dark: 'primary.dark'
+      },
+      secondary: {
+        default: 'secondary.default',
+        _dark: 'secondary.dark'
+      }
+    }
   },
   breakpoints: {
     base: '0em',
@@ -20,14 +71,7 @@ const theme = extendTheme({
     '2xl': '96em',
   },
   components: {
-    Button: {
-      baseStyle: {
-        color: 'text.default',
-        _dark: {
-          color: 'text.white'
-        }
-      }
-    }
+    Button: buttonTheme,
   }
 })
 
