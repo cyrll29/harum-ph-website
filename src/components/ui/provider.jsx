@@ -1,6 +1,6 @@
 'use client'
 
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import theme from '@/theme'
 
 export function Provider({ children }) {

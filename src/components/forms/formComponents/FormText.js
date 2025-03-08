@@ -4,12 +4,13 @@ import { Input, Box, Text } from '@chakra-ui/react'
 const FormText = ({
   register,
   title,
+  name,
   fieldType
 }) => {
   return (
-    <Box>
+    <Box display={'flex'} flexDirection={'column'} rowGap={2}>
       <Text>{title}</Text>
-      <Input {...register(title)} placeholder={title} type={fieldType} />
+      <Input {...register(name)} placeholder={title} type={fieldType} />
     </Box>
   )
 }
