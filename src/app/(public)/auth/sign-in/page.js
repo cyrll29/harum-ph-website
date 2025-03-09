@@ -3,7 +3,7 @@
 // UI Related
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Container, Button } from '@chakra-ui/react';
+import { Button, Text } from '@chakra-ui/react';
 
 // Functions
 import { generateFormField } from '@/components/forms/utils/generateFormField'
@@ -17,7 +17,8 @@ const SignIn = () => {
   }
 
   return (
-    <Container my={20} p={10} border='2px solid lightgray' borderRadius={14}>
+    <>
+      <Text fontSize='2xl' fontWeight='bold'>Sign In</Text>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
         {
           SignInForms.map((form, i) => (
@@ -26,7 +27,7 @@ const SignIn = () => {
         }
         <Button type='submit' variant='primary'>Sign In</Button>
       </form>
-    </Container>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import { extendTheme, defineStyle, defineStyleConfig } from "@chakra-ui/react";
+import { extendTheme, defineStyle, defineStyleConfig, Container } from "@chakra-ui/react";
 // -------------------------------------------------- Button Theme ---------------------------------------------------
 const primaryVariantButton = defineStyle({
   bg: 'secondary',
@@ -24,6 +24,19 @@ const buttonTheme = defineStyleConfig({
   variants: {
     primary: primaryVariantButton,
     outline: outlineVariantButton,
+  }
+})
+
+// ------------------------------------------------- Container Theme -------------------------------------------------
+
+const authVariant = defineStyle({ 
+  my: 20,
+  p: 10,
+})
+
+const containerTheme = defineStyleConfig({
+  variants: {
+    authForm: authVariant,
   }
 })
 
@@ -72,6 +85,7 @@ const theme = extendTheme({
   },
   components: {
     Button: buttonTheme,
+    Container: containerTheme
   }
 })
 

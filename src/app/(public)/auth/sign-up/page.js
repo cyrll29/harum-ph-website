@@ -3,7 +3,7 @@
 // UI Related
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Container, Button } from '@chakra-ui/react'
+import { Button, Text } from '@chakra-ui/react'
 
 // Functions
 import { generateFormField } from '@/components/forms/utils/generateFormField'
@@ -11,14 +11,24 @@ import { generateFormField } from '@/components/forms/utils/generateFormField'
 // Utils
  import { SignUpForms } from '../utils/formFIelds'
 
+/**
+ * A page for signing up.
+ *
+ * Displays a form with fields for First Name, Last Name, Phone Number, Username, Email, and Password.
+ * When the form is submitted, logs the form data to the console.
+ *
+ * @returns The SignUp page.
+ */
 const SignUp = () => {
   const { register, handleSubmit } = useForm()
+
   const onSubmit = (data) => {
     console.log(data)
   }
 
   return (
-    <Container my={20} p={10} border='2px solid' borderColor='secondary' borderRadius={14}>
+    <>
+      <Text fontSize='2xl' fontWeight='bold'>Sign Up</Text>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
         {
           SignUpForms.map((form, i) => (
@@ -27,7 +37,7 @@ const SignUp = () => {
         }
         <Button type='submit' variant='primary'>Sign Up</Button>
       </form>
-    </Container>
+    </>
   )
 }
 
