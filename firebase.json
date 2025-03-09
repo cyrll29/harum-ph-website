@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "harum-website-develop",
     "source": ".",
     "ignore": [
       "firebase.json",

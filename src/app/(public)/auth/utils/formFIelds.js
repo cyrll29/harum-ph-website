@@ -1,8 +1,8 @@
 export const SignInForms = [
   {
-    fieldType: 'text',
-    title: 'Username',
-    fieldName: 'username'
+    fieldType: 'email',
+    title: 'Email',
+    fieldName: 'email'
   },
   {
     fieldType: 'password',
