@@ -1,8 +1,8 @@
 export const SignInForms = [
   {
-    fieldType: 'email',
-    title: 'Email',
-    fieldName: 'email'
+    fieldType: 'text',
+    title: 'Username',
+    fieldName: 'username'
   },
   {
     fieldType: 'password',
@@ -21,6 +21,16 @@ export const SignUpForms = [
     fieldType: 'text',
     title: 'Last Name',
     fieldName: 'lastName'
+  },
+  {
+    fieldType: 'tel',
+    title: 'Phone Number',
+    fieldName: 'phoneNumber'
+  },
+  {
+    fieldType: 'text',
+    title: 'Username',
+    fieldName: 'username'
   },
   {
     fieldType: 'email',

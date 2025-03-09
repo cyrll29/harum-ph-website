@@ -10,6 +10,7 @@
   switch (fieldType) {
     case 'email':
     case 'password':
+    case 'tel':
     case 'text':
       return (
         <FormText 

@@ -10,7 +10,7 @@ const FormText = ({
   return (
     <Box display={'flex'} flexDirection={'column'} rowGap={2}>
       <Text>{title}</Text>
-      <Input {...register(name)} placeholder={title} type={fieldType} />
+      <Input {...register(name)} placeholder={title} type={fieldType} variant='flushed'/>
     </Box>
   )
 }
