@@ -1,50 +1,36 @@
 'use client';
 
 // UI Related
-import React, { useState} from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Text, Stack } from '@chakra-ui/react';
+
+// Firebase
+import { auth, provider } from '@/services/firebase/firebase';
+import { signInWithPopup, signOut } from "firebase/auth";
 
 // Functions
 import { generateFormField } from '@/components/forms/utils/generateFormField'
 
 // Utils
 import { SignInForms } from '../utils/formFIelds';
+
 const SignIn = () => {
-  const [otpForm, setOtpForm] = useState(false)
   const { register, handleSubmit } = useForm()
+
   const onSubmit = async (data) => {
-    if (!otpForm) {
-      await sendOtp(data)
-      setOtpForm(true)
-      return;
+    console.log(data)
+  }
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithPopup(auth, provider)
+        .then((res) => {
+          console.log(res)
+        })
+    } catch (error) {
+      console.log(error)
     }
-
-    verifyOtp(data)
-  }
-
-  const sendOtp = async (formData) => {
-    const response = await fetch('/api/generateOtp', {
-      method: 'POST',
-      body: JSON.stringify({ formData }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await response.json()
-    console.log(data)
-  }
-
-  const verifyOtp = async (formData) => {
-    const response = await fetch('/api/verifyOtp', {
-      method: 'POST',
-      body: JSON.stringify({ formData }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await response.json()
-    console.log(data)
   }
 
   return (
@@ -52,26 +38,14 @@ const SignIn = () => {
       <Text fontSize='2xl' fontWeight='bold'>Sign In</Text>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
         {
-          !otpForm ?
           SignInForms.map((form, i) => (
             generateFormField({ fieldType: form.fieldType, register, title: form.title, name: form.fieldName, index: i })
           ))
-          : (
-            generateFormField({ fieldType: 'number', register, title: 'Verify OTP', name: 'otp', index: 0 })
-          )
         }
-        {
-          !otpForm ? (
-            <Button type='submit' variant='primary'>Sign In</Button>
-
-          )
-          : (
-            <Stack direction='row' spacing={4}>
-              <Button onClick={() => setOtpForm(false)} variant='outline'>Back</Button>
-              <Button type='submit' variant='primary' flex="1">Verify OTP</Button>
-            </Stack>
-          )
-        }
+        <Stack direction='column' spacing={4}>
+          <Button type='submit' variant='outline'>Sign In</Button>
+          <Button variant='primary' onClick={handleGoogleLogin}>Continue with Google</Button>
+        </Stack>
       </form>
     </>
   )
