@@ -1,44 +1,7 @@
-import { extendTheme, defineStyle, defineStyleConfig, Container } from "@chakra-ui/react";
-// -------------------------------------------------- Button Theme ---------------------------------------------------
-const primaryVariantButton = defineStyle({
-  bg: 'secondary',
-  color: 'primary',
-  _hover: {
-    bg: 'primary.light',
-    color: '#fff'
-  }
-})
+import { extendTheme, defineStyle, defineStyleConfig } from "@chakra-ui/react";
 
-const outlineVariantButton = defineStyle({
-  bg: 'transparent',
-  border: '1px solid',
-  borderColor: 'secondary',
-  color: 'secondary',
-  _hover: {
-    bg: 'secondary',
-    color: 'primary'
-  }
-})
-
-const buttonTheme = defineStyleConfig({
-  variants: {
-    primary: primaryVariantButton,
-    outline: outlineVariantButton,
-  }
-})
-
-// ------------------------------------------------- Container Theme -------------------------------------------------
-
-const authVariant = defineStyle({ 
-  my: 20,
-  p: 10,
-})
-
-const containerTheme = defineStyleConfig({
-  variants: {
-    authForm: authVariant,
-  }
-})
+import { buttonTheme } from "./components/Button";
+import { containerTheme } from "./components/Container";
 
 // -------------------------------------------------- Theme Config ---------------------------------------------------
 const theme = extendTheme({

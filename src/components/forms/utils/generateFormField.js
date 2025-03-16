@@ -3,9 +3,11 @@
  export const generateFormField = ({
   fieldType,
   register,
+  errors,
   title,
   name,
-  index
+  index,
+  validate
  }) => {
   switch (fieldType) {
     case 'email':
@@ -15,11 +17,13 @@
     case 'text':
       return (
         <FormText 
+          errors={errors}
           register={register} 
           title={title} 
           key={index} 
           fieldType={fieldType}
           name={name}
+          validation={validate}
         />
       )
   }

@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form'
 import { Button, Text, Stack } from '@chakra-ui/react'
 
 // Firebase
-import { auth, provider } from '@/services/firebase/firebase';
-import { signInWithPopup, signOut } from "firebase/auth";
+import { auth } from '@/services/firebase/firebase';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 // Functions
 import { generateFormField } from '@/components/forms/utils/generateFormField'
@@ -17,7 +17,7 @@ import { generateFormField } from '@/components/forms/utils/generateFormField'
 
 const SignUp = () => {
   const [otpForm, setOtpForm] = useState(false)
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
   const onSubmit = async (data) => {
     if (otpForm === false) {
@@ -61,17 +61,30 @@ const SignUp = () => {
         {
           !otpForm ?
           SignUpForms.map((form, i) => (
-            generateFormField({ fieldType: form.fieldType, register, title: form.title, name: form.fieldName, index: i })
+            generateFormField({ 
+              fieldType: form.fieldType, 
+              register,
+              errors, 
+              title: form.title, 
+              name: form.fieldName, 
+              index: i,
+              validate: form.validate 
+            })
           ))
           : (
-            generateFormField({ fieldType: 'number', register, title: 'Verify OTP', name: 'otp', index: 0 })
+            generateFormField({ 
+              fieldType: 'number', 
+              register, 
+              errors,
+              title: 'Verify OTP', 
+              name: 'otp', 
+              index: 0 })
           )
         }
         {
           !otpForm ? (
             <Stack direction='column' spacing={4}>
               <Button type='submit' variant='outline'>Continue</Button>
-              <Button type='button' variant='primary'>Continue with Google</Button>
             </Stack>
 
           )
