@@ -16,7 +16,7 @@ import { generateFormField } from '@/components/forms/utils/generateFormField'
 import { SignInForms } from '../utils/formFIelds';
 
 const SignIn = () => {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, formState: { errors }, setError } = useForm()
 
   const onSubmit = async (data) => {
     console.log(data)
@@ -39,7 +39,15 @@ const SignIn = () => {
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
         {
           SignInForms.map((form, i) => (
-            generateFormField({ fieldType: form.fieldType, register, title: form.title, name: form.fieldName, index: i })
+            generateFormField({ 
+              fieldType: form.fieldType, 
+              register, 
+              errors, 
+              title: form.title, 
+              name: form.fieldName, 
+              index: i, 
+              validate: form.validate
+            })
           ))
         }
         <Stack direction='column' spacing={4}>
