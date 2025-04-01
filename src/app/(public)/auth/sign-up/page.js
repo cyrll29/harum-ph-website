@@ -3,11 +3,11 @@
 // UI Related
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button, Text, Stack } from '@chakra-ui/react'
+import { Button, Text, Stack, useToast } from '@chakra-ui/react'
 
 // Firebase
 import { auth } from '@/services/firebase/firebase';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 
 // Functions
 import { generateFormField } from '@/components/forms/utils/generateFormField'
@@ -18,16 +18,36 @@ import { generateFormField } from '@/components/forms/utils/generateFormField'
 const SignUp = () => {
   const [otpForm, setOtpForm] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const toast = useToast();
 
   const onSubmit = async (data) => {
+    console.log(data);
     if (otpForm === false) {
-      console.log(" I AM RUN ")
       await sendOtp(data)
       setOtpForm(true)
       return;
     }
-
+    const { email, password } = data;
     verifyOtp(data)
+    const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+    try {
+      await sendEmailVerification(userCredentials.user)
+      toast({
+        title: "Email Verification has been sent",
+        description: 'The email for verification of your account has been sent to your email',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+    } catch (err) {
+      toast({
+        title: "There was an error sending the email",
+        description: err.message,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
   }
 
   const sendOtp = async (formData) => {
@@ -81,25 +101,27 @@ const SignUp = () => {
               index: 0 })
           )
         }
-        {
-          !otpForm ? (
-            <Stack direction='column' spacing={4}>
-              <Button type='submit' variant='outline'>Continue</Button>
-            </Stack>
-
-          )
-          : (
-            <Stack direction='row' spacing={4}>
-              <Button type='button' 
-                onClick={(e) => {
-                  e.preventDefault();
-                  setOtpForm(false)
-                }} 
-                variant='outline'>Back</Button>
-              <Button type='submit' variant='primary' flex="1">Verify OTP</Button>
-            </Stack>
-          )
-        }
+        <Stack direction={otpForm ? 'row' : 'column'} spacing={4}>
+          {otpForm && (
+            <Button 
+              type='button'
+              onClick={(e) => {
+                e.preventDefault();
+                setOtpForm(false);
+              }}
+              variant='outline'
+            >
+              Back
+            </Button>
+          )}
+          <Button 
+            type='submit' 
+            variant={otpForm ? 'primary' : 'outline'} 
+            flex={otpForm ? "1" : undefined}
+          >
+            {otpForm ? 'Verify OTP' : 'Continue'}
+          </Button>
+        </Stack>
       </form>
     </>
   )

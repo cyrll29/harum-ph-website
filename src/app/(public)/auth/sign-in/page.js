@@ -3,7 +3,9 @@
 // UI Related
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 import { Button, Text, Stack } from '@chakra-ui/react';
+import { FcGoogle } from "react-icons/fc";
 
 // Firebase
 import { auth, provider } from '@/services/firebase/firebase';
@@ -16,7 +18,15 @@ import { generateFormField } from '@/components/forms/utils/generateFormField'
 import { SignInForms } from '../utils/formFIelds';
 
 const SignIn = () => {
-  const { register, handleSubmit, formState: { errors }, setError } = useForm()
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { 
+      errors 
+    } 
+  } = useForm();
+
+  const router = useRouter();
 
   const onSubmit = async (data) => {
     console.log(data)
@@ -28,6 +38,7 @@ const SignIn = () => {
         .then((res) => {
           console.log(res)
         })
+        router.push('/')
     } catch (error) {
       console.log(error)
     }
@@ -52,7 +63,9 @@ const SignIn = () => {
         }
         <Stack direction='column' spacing={4}>
           <Button type='submit' variant='outline'>Sign In</Button>
-          <Button variant='primary' onClick={handleGoogleLogin}>Continue with Google</Button>
+          <Button variant='primary' onClick={handleGoogleLogin} gap={4}>
+            <FcGoogle size={20} /> Continue with Google
+          </Button>
         </Stack>
       </form>
     </>
