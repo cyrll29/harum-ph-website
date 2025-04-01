@@ -17,16 +17,21 @@ export default function RootLayout({ children }) {
       >
         <FirebaseAuthProvider>
           <Provider>
-            <Navbar />
             <Flex
-              as="main"
-              flex="1"
               direction="column"
-              p="2em"
-              justifyContent="center"
-              alignItems="center"
+              minH="100vh"
             >
-              {children}
+              <Navbar />
+              <Flex
+                as="main"
+                flex="1"
+                direction="column"
+                p="2em"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {children}
+              </Flex>
             </Flex>
           </Provider>
         </FirebaseAuthProvider>
