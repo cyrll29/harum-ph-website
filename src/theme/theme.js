@@ -1,4 +1,4 @@
-import { extendTheme, defineStyle, defineStyleConfig } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 
 import { buttonTheme } from "./components/Button";
 import { containerTheme } from "./components/Container";
