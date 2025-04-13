@@ -17,6 +17,13 @@ jobs:
       - run:
           name: Build the application
           command: yarn build  # Build the Next.js application
+      - persist_to_workspace:
+          root: .
+          paths:
+            - public
+            - .cache
+            - firebase.json
+            - .firebaserc
 
   deploy:
     docker:
@@ -32,7 +39,11 @@ jobs:
       - run:
           name: Deploy to Firebase
           command: |
-            echo $FIREBASE_TOKEN | firebase deploy --token "$FIREBASE_TOKEN"
+            echo $FIREBASE_TOKEN
+            firebase --version
+            firebase use firebase-sandbox
+            firebase deploy --only hosting --token "$FIREBASE_TOKEN"
+            echo $?
 
 workflows:
   version: 2
