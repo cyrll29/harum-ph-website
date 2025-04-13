@@ -29,6 +29,8 @@ jobs:
     docker:
       - image: cimg/node:lts  # Use the Node.js LTS version of the Docker image
     steps:
+      - attach_workspace:
+          at: .
       - checkout
       - run:
           name: Install Firebase Tools
