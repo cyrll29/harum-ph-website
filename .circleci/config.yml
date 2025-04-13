@@ -6,11 +6,14 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/node:14  # Use the Node.js 14 Docker image
+      - image: cimg/node:lts  # Use the Node.js LTS version of the Docker image
     steps:
-      - checkout  # Check out the code from the repository
+      - checkout
       - node/install-packages:
           pkg-manager: yarn
+      - run:
+          name: Install dependencies
+          command: yarn
       - run:
           name: Run tests
           command: yarn test  # Run tests defined in package.json
@@ -20,7 +23,7 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/node:14
+      - image: cimg/node:lts  # Use the Node.js LTS version of the Docker image
     steps:
       - checkout
       - run:
