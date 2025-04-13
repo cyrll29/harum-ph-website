@@ -8,7 +8,7 @@ jobs:
       tag: '20.11.0'
     steps:
       - checkout
-      - run: echo "hello world"
+      - run: echo "This is a new change"
 workflows:
   sample-workflow:
     jobs:
