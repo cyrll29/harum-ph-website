@@ -27,9 +27,6 @@ jobs:
           name: Install Firebase Tools
           command: yarn global add firebase-tools  # Install Firebase CLI using Yarn
       - run:
-          name: Build Next.js application
-          command: yarn build
-      - run:
           name: Enable Firebase Web Frameworks Experiment
           command: firebase experiments:enable webframeworks
       - run:
