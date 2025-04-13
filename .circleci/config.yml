@@ -31,7 +31,6 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - checkout
       - run:
           name: Install Firebase Tools
           command: yarn global add firebase-tools  # Install Firebase CLI using Yarn
