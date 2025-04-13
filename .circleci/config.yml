@@ -8,7 +8,7 @@ jobs:
       tag: '20.11.0'
     steps:
       - checkout
-      - run: echo "This is a new change"
+      - run: echo "This is a new commit for circleci"
 workflows:
   sample-workflow:
     jobs:
