@@ -1,15 +1,44 @@
 version: 2.1
+
 orbs:
-  node: circleci/node@5
+  node: circleci/node@5  # Use the CircleCI Node.js orb
+
 jobs:
-  hello-job:
-    executor:
-      name: node/default
-      tag: '20.11.0'
+  build:
+    docker:
+      - image: cimg/node:lts  # Use the Node.js LTS version of the Docker image
     steps:
       - checkout
-      - run: echo "This is a new commit for circleci"
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          name: Install dependencies
+          command: yarn
+      - run:
+          name: Build the application
+          command: yarn build  # Build the Next.js application
+
+  deploy:
+    docker:
+      - image: cimg/node:lts  # Use the Node.js LTS version of the Docker image
+    steps:
+      - checkout
+      - run:
+          name: Install Firebase Tools
+          command: yarn global add firebase-tools  # Install Firebase CLI using Yarn
+      - run:
+          name: Enable Firebase Web Frameworks Experiment
+          command: firebase experiments:enable webframeworks
+      - run:
+          name: Deploy to Firebase
+          command: |
+            echo $FIREBASE_TOKEN | firebase deploy --token "$FIREBASE_TOKEN"  # Deploy to Firebase Hosting
+
 workflows:
-  sample-workflow:
+  version: 2
+  build_and_deploy:
     jobs:
-      - hello-job
+      - build
+      - deploy:
+          requires:
+            - build  # Ensure the deploy job runs after the build job
