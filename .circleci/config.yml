@@ -1,0 +1,15 @@
+version: 2.1
+orbs:
+  node: circleci/node@5
+jobs:
+  hello-job:
+    executor:
+      name: node/default
+      tag: '20.11.0'
+    steps:
+      - checkout
+      - run: echo "hello world"
+workflows:
+  sample-workflow:
+    jobs:
+      - hello-job
