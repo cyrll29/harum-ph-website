@@ -41,7 +41,7 @@ jobs:
           command: |
             echo $FIREBASE_TOKEN
             firebase --version
-            firebase use firebase-sandbox
+            firebase use fir-sandbox-f3227
             firebase deploy --only hosting --token "$FIREBASE_TOKEN"
             echo $?
 
