@@ -8,7 +8,7 @@ jobs:
       tag: '20.11.0'
     steps:
       - checkout
-      - run: echo "This is a new commit for circleci"
+      - run: echo "This should only be run when run-ci label is added on the PR"
 workflows:
   sample-workflow:
     jobs:
