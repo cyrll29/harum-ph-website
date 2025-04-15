@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "fir-sandbox-f3227"
-  }
+    "default": "fir-sandbox-f3227",
+    "development": "fir-sandbox-f3227"
+  },
+  "targets": {},
+  "etags": {}
 }
